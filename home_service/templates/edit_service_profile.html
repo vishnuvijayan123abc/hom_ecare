@@ -86,11 +86,11 @@
     <label for="exampleInputPassword1">Select City</label>
     <select class="form-control" name="city">
         {% for i in city %}
-        {% ifequal pro.city.city  i.city %}
-        <option value="{{i.city}}" selected>{{i.city}}</option>
-        {% else %}
-        <option value="{{i.city}}">{{i.city}}</option>
-        {% endifequal %}
+        {% if pro.city.city == i.city %}
+    <option value="{{i.city}}" selected>{{i.city}}</option>
+{% else %}
+    <option value="{{i.city}}">{{i.city}}</option>
+{% endif %}
         {% endfor %}
     </select>
   </div>

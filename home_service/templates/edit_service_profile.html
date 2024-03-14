@@ -107,11 +107,11 @@
     <label for="exampleInputPassword1">Type of Id</label>
     <select class="form-control" name="card">
         {% for i in car %}
-        {% ifequal pro.id_type  i.card %}
-        <option value="{{i.card}}" selected>{{i.card}}</option>
-        {% else %}
-        <option value="{{i.card}}">{{i.card}}</option>
-        {% endifequal %}
+        {% if pro.id_type == i.card %}
+        <option value="{{ i.card }}" selected>{{ i.card }}</option>
+    {% else %}
+        <option value="{{ i.card }}">{{ i.card }}</option>
+    {% endif %}
         {% endfor %}
     </select>
   </div>
@@ -119,11 +119,12 @@
     <label for="exampleInputPassword1">Select your Service</label>
     <select class="form-control" name="service">
         {% for i in ser %}
-        {% ifequal pro.service_name i.category %}
-        <option value="{{i.category}}" selected>{{i.category}}</option>
-        {% else %}
-        <option value="{{i.category}}">{{i.category}}</option>
-        {% endifequal %}
+        {% if pro.service_name == i.category %}
+    <option value="{{ i.category }}" selected>{{ i.category }}</option>
+{% else %}
+    <option value="{{ i.category }}">{{ i.category }}</option>
+{% endif %}
+
         {% endfor %}
     </select>
   </div>

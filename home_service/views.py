@@ -103,7 +103,7 @@ class LoginUserView(View):
                     return redirect('user_home')  # Replace 'success_redirect_url_pat2' with your desired URL
                 else:
                     login(request, user)
-                    return redirect('login')  # Replace 'notmember_redirect_url' with your desired URL
+                    return redirect('login+')  # Replace 'notmember_redirect_url' with your desired URL
 
         else:
             error = "not"

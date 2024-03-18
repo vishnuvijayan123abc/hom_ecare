@@ -3,7 +3,8 @@
 {% load static %}
 <html>
 <head>
-<title>Home Service</title>
+<title>Shelter Squad</title>
+<link rel="icon" href="{% static 'images/logo11.png' %}" type="image/png" >
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <meta name="keywords" content="Home Service Management System a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -20,12 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<style>
-    .nav-link:hover {
-  background-color: red;
-  padding:10px;
-  border-radius:8px;
-}</style>
+
 </head>
 
 <body>
@@ -41,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <ul class="navbar-nav ml-auto">
       {% if request.user.is_staff %}
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="background-color:red" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user"></i> Hello,{{request.user.username}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -70,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="background-color:red" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user"></i> Hello,{{request.user.username}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -90,7 +86,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <i class="fa fa-first-order"></i> My Order </a>
       </li>
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="background-color:red" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user"></i> Hello,{{request.user.username}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -124,7 +120,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         
 
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="background-color:red" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-sign-in"></i> Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -148,7 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Footer-->
 
 <!-- Footer -->
-<footer class="text-center text-lg-start text-muted mt-3" style="background-color: chocolate;">
+<footer class="text-center text-lg-start text-muted mt-auto mb-0" style="background-color: chocolate;">
   <!-- Section: Links  -->
   <section class="">
     <div class="container text-center text-md-start pt-4 pb-4">
@@ -158,10 +154,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="col-12 col-lg-3 col-sm-12 mb-2">
           <!-- Content -->
           <a href="https://mdbootstrap.com/" target="_blank" class="text-white h2">
-            Shelter squad
+            Shelter Squad
           </a>
           <p class="mt-1 text-white">
-            © 2023 Copyright: vs group of companies
+            © 2023 Copyright: VS group of company
           </p>
         </div>
         <!-- Grid column -->
@@ -285,7 +281,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Footer -->
 <!-- /Footer-->
     <!-- bootstrap-pop-up for login and register -->
-    <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+    <div class="modal video-modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

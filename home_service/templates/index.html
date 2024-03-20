@@ -33,7 +33,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <form name="myform" method="POST" action="">  
+    {% csrf_token %}
+    <input type="text" name="search" placeholder="Search" />
+</form> 
+  
+ 
+    
     <ul class="navbar-nav ml-auto">
       {% if request.user.is_staff %}
         <li class="nav-item dropdown">
@@ -46,11 +52,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
           <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
         </div>
+        
       </li>
         {% else %}
         {% if request.user.username %}
         {% if error == "pat" %}
 
+        <form method="GET" action="{% url 'customer_service_search' %}">
+              <!-- {{ form.as_p }} -->
+              <input type="text" name="category" id="">
+              <button class="btn" type="submit">Search</button>
+            </form>
         <li class="nav-item ">
         <a class="nav-link" href="{% url 'user_home' %}">
            <i class="fa fa-home"></i> Home</a>
@@ -63,7 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <a class="nav-link" href="{% url 'customer_order' %}">
            <i class="fa fa-file"></i> My Booking</a>
       </li>
-
+      
     
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

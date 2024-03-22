@@ -56,4 +56,7 @@ urlpatterns = [
     path('service_man_detail(<int:pid>)',service_man_detail,name="service_man_detail"),
     path('delete_city(<int:pid>)',delete_city,name="delete_city"),
     path('search/', customer_service_search, name='customer_service_search'),
+    path('forgot-password/', views.forgot_password_view, name='forgot_password'),
+    path('verify-otp/', views.verify_otp_for_reset, name='verify_otp_for_reset'),
+    path('reset-password/', views.reset_password, name='reset_password'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

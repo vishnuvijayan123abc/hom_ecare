@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+</head>
+<body>
+    <h1>Verify OTP</h1>
+    <p>An OTP has been sent to your email. Please enter it below:</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="email" value="{{ email }}">
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>

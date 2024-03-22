@@ -6,6 +6,21 @@ from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from home_service.forms import CustomerServiceSearchForm
+from django.core.mail import send_mail
+from django.http import HttpResponse
+import random
+import string
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponseBadRequest
+from django.contrib.auth.models import User
+from .forms import ForgotPasswordForm
+from django.utils.crypto import get_random_string
+from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
+from django.utils.crypto import get_random_string
+from django.conf import settings
+from .forms import ForgotPasswordForm, OTPForm
+
 
 from home_service.models import Service
 import logging
@@ -714,3 +729,79 @@ def customer_service_search(request):
     else:
         form = CustomerServiceSearchForm()
         return render(request, 'search_results.html', {'form': form})
+
+
+User = get_user_model()
+
+def generate_otp(user):
+    otp = get_random_string(length=6, allowed_chars='0123456789')
+    user.profile.reset_password_otp = otp  # Assuming you have a UserProfile model with reset_password_otp field
+    user.profile.save()
+    return otp
+
+def send_otp_to_user_email(user, otp):
+    subject = 'Reset Password OTP'
+    message = f'Your OTP for resetting the password is: {otp}'
+    from_email = 'hcare0254@gmail.com'  # Update with your email
+    recipient_list = [user.email]
+
+    try:
+        send_mail(subject, message, from_email, recipient_list)
+    except Exception as e:
+        pass  # Handle email sending exception
+
+def forgot_password_view(request):
+    if request.method == 'POST':
+        form = ForgotPasswordForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            try:
+                user = User.objects.get(username=username)
+                otp = generate_otp(user)
+                send_otp_to_user_email(user, otp)
+                request.session['reset_password_username'] = username  # Store username in session
+                return redirect('verify_otp_for_reset')
+            except User.DoesNotExist:
+                return render(request, 'user_not_found.html')
+    else:
+        form = ForgotPasswordForm()
+
+    return render(request, 'forgot_password_form.html', {'form': form})
+
+def verify_otp_for_reset(request):
+    if request.method == 'POST':
+        form = OTPForm(request.POST)
+        if form.is_valid():
+            otp_entered = form.cleaned_data['otp']
+            username = request.session.get('reset_password_username')
+            if username:
+                try:
+                    user = User.objects.get(username=username)
+                    if user.profile.reset_password_otp == otp_entered:
+                        # OTP verified successfully
+                        return redirect('reset_password')
+                    else:
+                        return render(request, 'verify_otp_for_reset.html', {'form': form, 'error': 'Invalid OTP'})
+                except User.DoesNotExist:
+                    pass  # Handle User.DoesNotExist as needed
+            else:
+                return redirect('forgot_password')
+    else:
+        form = OTPForm()
+
+    return render(request, 'verify_otp_for_reset.html', {'form': form})
+
+def reset_password(request):
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        username = request.session.get('reset_password_username')
+        if username and new_password:
+            try:
+                user = User.objects.get(username=username)
+                user.set_password(new_password)
+                user.save()
+                del request.session['reset_password_username']  # Remove username from session
+                return render(request, 'password_reset_success.html', {'username': username})
+            except User.DoesNotExist:
+                pass  # Handle User.DoesNotExist as needed
+    return render(request, 'reset_password.html')

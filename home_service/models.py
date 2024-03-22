@@ -20,6 +20,12 @@ class ID_Card(models.Model):
     def __str__(self):
         return self.card
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    reset_password_otp = models.CharField(max_length=6, blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     contact = models.CharField(max_length=100, null=True)

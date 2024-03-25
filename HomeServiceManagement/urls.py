@@ -4,6 +4,7 @@ from home_service.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 from home_service import views
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',Home,name="home"),
@@ -56,7 +57,8 @@ urlpatterns = [
     path('service_man_detail(<int:pid>)',service_man_detail,name="service_man_detail"),
     path('delete_city(<int:pid>)',delete_city,name="delete_city"),
     path('search/', customer_service_search, name='customer_service_search'),
-    path('forgot-password/', views.forgot_password_view, name='forgot_password'),
-    path('verify-otp/', views.verify_otp_for_reset, name='verify_otp_for_reset'),
-    path('reset-password/', views.reset_password, name='reset_password'),
+    path('reset_password',auth_views.PasswordResetView.as_view(template_name="reset_password.html"),name="reset_password"),
+    path('reset_password_sent/',auth_views.PasswordResetDoneView.as_view(template_name='reset_password_sent.html'),name="password_reset_done"),
+    path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='password_reset.html'),name="password_reset_confirm"),
+    path('reset_password_complete',auth_views.PasswordResetCompleteView.as_view(template_name='reset_password_complete.html'),name="password_reset_complete")
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

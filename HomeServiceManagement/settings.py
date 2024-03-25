@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_otp',
+    'razorpay',
     
     
     'django_otp.plugins.otp_totp',
@@ -134,3 +135,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hcare0254@gmail.com'
 EMAIL_HOST_PASSWORD ='kfem gdsl pobu uwya'
+
+
+RAZORPAY_KEY_ID = 'your_razorpay_key_id'
+RAZORPAY_KEY_SECRET = 'your_razorpay_key_secret'
